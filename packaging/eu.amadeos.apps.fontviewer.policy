@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/PolicyKit/1/policyconfig.dtd">
+<!-- amadeOS: the Font Viewer runs /usr/libexec/amade-fontviewer-helper through pkexec to install a font for all
+     users (into /usr/local/share/fonts/amadeos) or to remove one from there. Fonts for the user alone need no
+     password. The password is kept for a few minutes, so that installing several fonts asks once. -->
+<policyconfig>
+  <vendor>amadeOS</vendor>
+  <vendor_url>https://github.com/amadeos-eu/amade-fontviewer</vendor_url>
+  <action id="eu.amadeos.apps.fontviewer.install">
+    <description>Install fonts for all users</description>
+    <description xml:lang="de">Schriften für alle Benutzer installieren</description>
+    <description xml:lang="fr">Installer des polices pour tous les utilisateurs</description>
+    <description xml:lang="es">Instalar fuentes para todos los usuarios</description>
+    <description xml:lang="it">Installare caratteri per tutti gli utenti</description>
+    <message>Authentication is required to install or remove fonts for all users</message>
+    <message xml:lang="de">Zum Installieren oder Entfernen von Schriften für alle Benutzer ist eine Authentifizierung erforderlich</message>
+    <message xml:lang="fr">Une authentification est requise pour installer ou supprimer des polices pour tous les utilisateurs</message>
+    <message xml:lang="es">Se requiere autenticación para instalar o quitar fuentes para todos los usuarios</message>
+    <message xml:lang="it">È richiesta l'autenticazione per installare o rimuovere caratteri per tutti gli utenti</message>
+    <defaults>
+      <allow_any>no</allow_any>
+      <allow_inactive>no</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">/usr/libexec/amade-fontviewer-helper</annotate>
+  </action>
+</policyconfig>

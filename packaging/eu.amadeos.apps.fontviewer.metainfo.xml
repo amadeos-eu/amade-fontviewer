@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- AppStream metadata of amade-fontviewer, installed as /usr/share/metainfo/eu.amadeos.apps.fontviewer.metainfo.xml.
+     amadeOS Software shows it for the installed package; a repository's appstream-generator reads it too. -->
+<component type="desktop-application">
+  <id>eu.amadeos.apps.fontviewer</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>EUPL-1.2</project_license>
+
+  <name>amadeOS Font Viewer</name>
+  <name xml:lang="de">amadeOS Schriftarten</name>
+  <name xml:lang="fr">amadeOS Polices</name>
+  <name xml:lang="es">amadeOS Fuentes</name>
+  <name xml:lang="it">amadeOS Caratteri</name>
+
+  <summary>Look at, compare and install fonts</summary>
+  <summary xml:lang="de">Schriften ansehen, vergleichen und installieren</summary>
+  <summary xml:lang="fr">Voir, comparer et installer des polices</summary>
+  <summary xml:lang="es">Ver, comparar e instalar fuentes</summary>
+  <summary xml:lang="it">Vedere, confrontare e installare caratteri</summary>
+
+  <description>
+    <p>amade-fontviewer is the font program of the amadeOS desktop. It lists every font on the computer, each written in itself, shows a sample text in many sizes and all characters of a font, and installs font files you downloaded.</p>
+    <p xml:lang="de">amade-fontviewer ist das Schriftenprogramm des amadeOS-Desktops. Es listet alle Schriften des Computers, jede in sich selbst geschrieben, zeigt einen Mustertext in vielen Größen und alle Zeichen einer Schrift und installiert heruntergeladene Schriftdateien.</p>
+    <p xml:lang="fr">amade-fontviewer est le programme de polices du bureau amadeOS. Il liste toutes les polices de l'ordinateur, chacune écrite dans sa propre police, montre un texte d'exemple en plusieurs tailles et tous les caractères d'une police, et installe les fichiers de police téléchargés.</p>
+    <p xml:lang="es">amade-fontviewer es el programa de fuentes del escritorio amadeOS. Muestra todas las fuentes del ordenador, cada una escrita en sí misma, un texto de ejemplo en muchos tamaños y todos los caracteres de una fuente, e instala los archivos de fuente descargados.</p>
+    <p xml:lang="it">amade-fontviewer è il programma dei caratteri del desktop amadeOS. Elenca tutti i caratteri del computer, ognuno scritto con se stesso, mostra un testo di prova in molte dimensioni e tutti i simboli di un carattere, e installa i file di carattere scaricati.</p>
+    <ul>
+      <li>Your own sample text from 12 to 64 points, in every style of the family</li>
+      <li xml:lang="de">Eigener Mustertext von 12 bis 64 Punkt, in jedem Schnitt der Familie</li>
+      <li xml:lang="fr">Votre propre texte d'exemple de 12 à 64 points, dans chaque style de la famille</li>
+      <li xml:lang="es">Su propio texto de ejemplo de 12 a 64 puntos, en cada estilo de la familia</li>
+      <li xml:lang="it">Il proprio testo di prova da 12 a 64 punti, in ogni stile della famiglia</li>
+      <li>All characters by Unicode block, search by name or code, copy a character</li>
+      <li xml:lang="de">Alle Zeichen nach Unicode-Block, Suche nach Name oder Code, Zeichen kopieren</li>
+      <li xml:lang="fr">Tous les caractères par bloc Unicode, recherche par nom ou code, copie d'un caractère</li>
+      <li xml:lang="es">Todos los caracteres por bloque Unicode, búsqueda por nombre o código, copiar un carácter</li>
+      <li xml:lang="it">Tutti i simboli per blocco Unicode, ricerca per nome o codice, copia di un simbolo</li>
+      <li>Compare up to six fonts with the same text</li>
+      <li xml:lang="de">Bis zu sechs Schriften mit demselben Text vergleichen</li>
+      <li xml:lang="fr">Comparer jusqu'à six polices avec le même texte</li>
+      <li xml:lang="es">Comparar hasta seis fuentes con el mismo texto</li>
+      <li xml:lang="it">Confrontare fino a sei caratteri con lo stesso testo</li>
+      <li>Opens TTF and OTF files from Files and installs them for you or for all users</li>
+      <li xml:lang="de">Öffnet TTF- und OTF-Dateien aus Files und installiert sie für Sie oder für alle Benutzer</li>
+      <li xml:lang="fr">Ouvre les fichiers TTF et OTF depuis Files et les installe pour vous ou pour tous les utilisateurs</li>
+      <li xml:lang="es">Abre archivos TTF y OTF desde Files y los instala para usted o para todos los usuarios</li>
+      <li xml:lang="it">Apre i file TTF e OTF da Files e li installa per sé o per tutti gli utenti</li>
+    </ul>
+  </description>
+
+  <launchable type="desktop-id">amade-fontviewer.desktop</launchable>
+  <icon type="stock">amade-fontviewer</icon>
+  <categories>
+    <category>Graphics</category>
+    <category>Utility</category>
+  </categories>
+
+  <url type="homepage">https://github.com/amadeos-eu/amade-fontviewer</url>
+  <url type="bugtracker">https://github.com/amadeos-eu/amade-fontviewer/issues</url>
+  <developer id="eu.amadeos">
+    <name>amadeOS Project</name>
+  </developer>
+
+  <screenshots>
+    <screenshot type="default">
+      <caption>A font family with its sample text in many sizes</caption>
+      <caption xml:lang="de">Eine Schriftfamilie mit ihrem Mustertext in vielen Größen</caption>
+      <caption xml:lang="fr">Une famille de polices avec son texte d'exemple en plusieurs tailles</caption>
+      <caption xml:lang="es">Una familia de fuentes con su texto de ejemplo en muchos tamaños</caption>
+      <caption xml:lang="it">Una famiglia di caratteri con il testo di prova in molte dimensioni</caption>
+      <image>https://raw.githubusercontent.com/amadeos-eu/amade-fontviewer/main/docs/screenshots/amade-fontviewer.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>All characters of a font</caption>
+      <caption xml:lang="de">Alle Zeichen einer Schrift</caption>
+      <caption xml:lang="fr">Tous les caractères d'une police</caption>
+      <caption xml:lang="es">Todos los caracteres de una fuente</caption>
+      <caption xml:lang="it">Tutti i simboli di un carattere</caption>
+      <image>https://raw.githubusercontent.com/amadeos-eu/amade-fontviewer/main/docs/screenshots/amade-fontviewer-characters.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>A downloaded font file, ready to install</caption>
+      <caption xml:lang="de">Eine heruntergeladene Schriftdatei, bereit zum Installieren</caption>
+      <caption xml:lang="fr">Un fichier de police téléchargé, prêt à installer</caption>
+      <caption xml:lang="es">Un archivo de fuente descargado, listo para instalar</caption>
+      <caption xml:lang="it">Un file di carattere scaricato, pronto da installare</caption>
+      <image>https://raw.githubusercontent.com/amadeos-eu/amade-fontviewer/main/docs/screenshots/amade-fontviewer-file.png</image>
+    </screenshot>
+  </screenshots>
+
+  <provides>
+    <binary>amade-fontviewer</binary>
+    <mediatype>font/ttf</mediatype>
+    <mediatype>font/otf</mediatype>
+    <mediatype>font/collection</mediatype>
+  </provides>
+  <content_rating type="oars-1.1"/>
+</component>

@@ -1,0 +1,55 @@
+#!/bin/sh
+# amade-fontviewer-helper: installs and removes fonts for all users, run as root through pkexec
+# (polkit action eu.amadeos.apps.fontviewer.install). The Font Viewer hands the font itself on standard input,
+# so root never opens a path the user named; only files in /usr/local/share/fonts/amadeos are touched.
+#
+#   amade-fontviewer-helper install NAME   < font file
+#   amade-fontviewer-helper remove NAME
+#
+# Prints "@@done" or "@@error ID MESSAGE" and exits with 0 or 1.
+set -eu
+umask 022
+# pkexec clears the environment, so the variable only works when root runs the helper directly (the tests).
+DIR=${AMADE_FONTVIEWER_FONTS:-/usr/local/share/fonts/amadeos}
+MAX_BYTES=268435456
+
+fail() {
+    echo "@@error $1 $2"
+    exit 1
+}
+
+[ $# -eq 2 ] || fail usage "usage: amade-fontviewer-helper install|remove NAME"
+name=$2
+# Plain ASCII names with a font ending, no folders, not hidden (the Font Viewer cleans names the same way).
+printf '%s' "$name" | LC_ALL=C grep -Eq '^[A-Za-z0-9_+ -][A-Za-z0-9._+ -]*\.([Tt][Tt][FfCc]|[Oo][Tt][FfCc]|[Pp][Ff][BbAa])$' \
+    || fail name "not a font file name: $name"
+[ ${#name} -le 200 ] || fail name "name too long"
+
+case "$1" in
+install)
+    mkdir -p "$DIR"
+    chmod 755 "$DIR"
+    tmp=$(mktemp "$DIR/.incoming.XXXXXX")
+    trap 'rm -f "$tmp"' EXIT
+    head -c "$MAX_BYTES" > "$tmp"
+    magic=$(head -c 4 "$tmp" | od -An -tx1 | tr -d ' \n')
+    case "$magic" in
+        00010000|4f54544f|74727565|74746366|74797031|8001*|2521*) ;;
+        *) fail format "not a TrueType, OpenType or Type 1 font" ;;
+    esac
+    chmod 644 "$tmp"
+    mv -f "$tmp" "$DIR/$name"
+    trap - EXIT
+    fc-cache -f "$DIR" >/dev/null 2>&1 || true
+    echo "@@done"
+    ;;
+remove)
+    [ -f "$DIR/$name" ] && [ ! -L "$DIR/$name" ] || fail missing "no such font: $name"
+    rm -f "$DIR/$name"
+    fc-cache -f "$(dirname "$DIR")" >/dev/null 2>&1 || true
+    echo "@@done"
+    ;;
+*)
+    fail usage "usage: amade-fontviewer-helper install|remove NAME"
+    ;;
+esac

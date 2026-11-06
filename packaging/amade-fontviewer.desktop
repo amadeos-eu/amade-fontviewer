@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=amadeOS Font Viewer
+Name[de]=amadeOS Schriftarten
+Name[fr]=amadeOS Polices
+Name[es]=amadeOS Fuentes
+Name[it]=amadeOS Caratteri
+GenericName=Font Viewer
+GenericName[de]=Schriftartenbetrachter
+GenericName[fr]=Visionneuse de polices
+GenericName[es]=Visor de fuentes
+GenericName[it]=Visualizzatore di caratteri
+Comment=Look at, compare and install fonts
+Comment[de]=Schriften ansehen, vergleichen und installieren
+Comment[fr]=Afficher, comparer et installer des polices
+Comment[es]=Ver, comparar e instalar fuentes
+Comment[it]=Visualizzare, confrontare e installare caratteri
+Icon=amade-fontviewer
+Exec=/usr/bin/amade-fontviewer %F
+Terminal=false
+Categories=Graphics;Utility;Viewer;
+MimeType=font/ttf;font/otf;font/collection;application/x-font-ttf;application/x-font-otf;application/vnd.ms-opentype;application/x-font-type1;
+Keywords=font;fonts;typeface;characters;glyphs;install;Schrift;Schriftart;Zeichen;police;fuente;carattere;
+StartupNotify=true
