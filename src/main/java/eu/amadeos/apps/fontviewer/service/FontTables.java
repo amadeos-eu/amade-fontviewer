@@ -28,6 +28,7 @@ public final class FontTables {
     private final ByteBuffer data;
     private final Map<String, int[]> tables = new HashMap<>();
 
+    // --8<-- [start:directory]
     /** Parses the table directory of face {@code index} (0 for files that are not collections). */
     public FontTables(ByteBuffer data, int index) throws IOException {
         this.data = data.duplicate();
@@ -55,6 +56,7 @@ public final class FontTables {
             throw new IOException("broken font file", e);
         }
     }
+    // --8<-- [end:directory]
 
     /** Opens the file and reads face {@code index}. */
     public static FontTables read(Path file, int index) throws IOException {
@@ -105,6 +107,7 @@ public final class FontTables {
         return t == null || t[1] < 6 ? 0 : u16(t[0] + 4);
     }
 
+    // --8<-- [start:name]
     /**
      * The text with this name ID: Windows English first, then any Windows language, then Unicode, then
      * Macintosh Roman; empty when the file has none.
@@ -141,7 +144,9 @@ public final class FontTables {
             return "";
         }
     }
+    // --8<-- [end:name]
 
+    // --8<-- [start:coverage]
     /** The characters with a glyph, from the best Unicode subtable of {@code cmap}. */
     public Coverage coverage() {
         int[] t = tables.get("cmap");
@@ -167,6 +172,7 @@ public final class FontTables {
             return Coverage.EMPTY;
         }
     }
+    // --8<-- [end:coverage]
 
     private int[] format12(int sub) {
         int groups = u32(sub + 12);

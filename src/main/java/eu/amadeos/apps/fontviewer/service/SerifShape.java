@@ -32,6 +32,7 @@ public final class SerifShape {
         }
     }
 
+    // --8<-- [start:shape]
     public static boolean hasSerifs(Font font) {
         return standsOnFoot(font, "I") && standsOnFoot(font, "l");
     }
@@ -53,4 +54,5 @@ public final class SerifShape {
         strip.intersect(new Area(outline));
         return strip.isEmpty() ? 0 : strip.getBounds2D().getWidth();
     }
+    // --8<-- [end:shape]
 }

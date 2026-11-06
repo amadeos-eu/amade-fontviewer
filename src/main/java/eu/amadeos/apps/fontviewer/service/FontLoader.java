@@ -41,6 +41,7 @@ public class FontLoader {
         cache.keySet().removeIf(k -> k.startsWith(prefix));
     }
 
+    // --8<-- [start:load]
     private static Optional<Font> load(Path file, int index) {
         try {
             String ext = FontFiles.extension(file).orElse("");
@@ -54,4 +55,5 @@ public class FontLoader {
             return Optional.empty();
         }
     }
+    // --8<-- [end:load]
 }

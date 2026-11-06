@@ -80,6 +80,7 @@ public class FontInstaller {
         return taken;
     }
 
+    // --8<-- [start:for-me]
     /** Copies the fonts into the user's font folder; returns the new files. */
     public List<Path> installForMe(Collection<Path> files) throws InstallException {
         Path dir = places.userFonts();
@@ -104,6 +105,7 @@ public class FontInstaller {
         }
         return installed;
     }
+    // --8<-- [end:for-me]
 
     /** Installs the fonts for every user, through the helper; asks for an administrator's password once. */
     public List<Path> installForAll(Collection<Path> files) throws InstallException {

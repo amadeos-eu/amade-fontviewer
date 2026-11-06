@@ -27,6 +27,7 @@ printf '%s' "$name" | LC_ALL=C grep -Eq '^[A-Za-z0-9_+ -][A-Za-z0-9._+ -]*\.([Tt
 
 case "$1" in
 install)
+    # --8<-- [start:install]
     mkdir -p "$DIR"
     chmod 755 "$DIR"
     tmp=$(mktemp "$DIR/.incoming.XXXXXX")
@@ -42,6 +43,7 @@ install)
     trap - EXIT
     fc-cache -f "$DIR" >/dev/null 2>&1 || true
     echo "@@done"
+    # --8<-- [end:install]
     ;;
 remove)
     [ -f "$DIR/$name" ] && [ ! -L "$DIR/$name" ] || fail missing "no such font: $name"

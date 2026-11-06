@@ -28,8 +28,10 @@ import java.util.stream.Collectors;
  */
 public class FontCatalog {
     /** One line per face; fields separated by tabs. */
+    // --8<-- [start:format]
     static final String FORMAT = "%{file}\\t%{index}\\t%{family}\\t%{style}\\t%{weight}\\t%{slant}\\t%{spacing}"
             + "\\t%{fontformat}\\t%{variable}\\t%{lang}\\n";
+    // --8<-- [end:format]
 
     private final CommandRunner runner;
     private final FontPlaces places;
