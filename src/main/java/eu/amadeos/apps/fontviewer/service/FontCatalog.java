@@ -13,6 +13,7 @@ import java.text.Collator;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -109,13 +110,22 @@ public class FontCatalog {
 
     /**
      * The same style twice (a font installed by the user and by a package, or as .ttf and .otf) is shown once;
-     * the user's own copy wins, as it does in fontconfig.
+     * the user's own copy wins, as it does in fontconfig. Among copies in the same place the best format wins:
+     * OpenType or TrueType before Type 1 (Ghostscript's URW fonts come as .otf, .t1 and .pfb), bitmaps last.
      */
     private static List<FontFace> dropSameStyle(List<FontFace> faces) {
         Map<String, FontFace> byStyle = new LinkedHashMap<>();
-        faces.stream().sorted((a, b) -> a.scope().compareTo(b.scope()))
+        faces.stream().sorted(Comparator.comparing(FontFace::scope).thenComparingInt(FontCatalog::formatRank))
                 .forEach(face -> byStyle.putIfAbsent(face.style().toLowerCase(Locale.ROOT), face));
         return List.copyOf(byStyle.values());
+    }
+
+    /** 0 for OpenType and TrueType, 1 for Type 1, 2 for anything else (bitmap fonts). */
+    static int formatRank(FontFace face) {
+        String format = face.format().toLowerCase(Locale.ROOT);
+        if (format.equals("truetype") || format.equals("cff")) return 0;
+        if (format.equals("type 1")) return 1;
+        return face.drawable() ? 1 : 2;
     }
 
     private static String firstOf(String commaList) {

@@ -87,6 +87,23 @@ class FontCatalogTest {
     }
 
     @Test
+    void prefersOpenTypeOverType1() {
+        // Ghostscript's URW fonts come three times: .t1 and .pfb (Type 1) and .otf (CFF); Java cannot open .t1
+        // with its TrueType loader, so the family looked broken when the .t1 file came first.
+        String urw = String.join("\n",
+                line("/usr/share/fonts/type1/urw-base35/D050000L.t1", 0, "D050000L", "Regular", "80", "0", "",
+                        "Type 1", "False", ""),
+                line("/usr/share/fonts/X11/Type1/D050000L.pfb", 0, "D050000L", "Regular", "80", "0", "",
+                        "Type 1", "False", ""),
+                line("/usr/share/fonts/opentype/urw-base35/D050000L.otf", 0, "D050000L", "Regular", "80", "0", "",
+                        "CFF", "False", ""));
+        List<FontFamily> families = FontCatalog.families(FontCatalog.parse(urw, PLACES), (f, i) -> FontDetails.NONE);
+        assertEquals(1, families.getFirst().faces().size());
+        assertEquals(Path.of("/usr/share/fonts/opentype/urw-base35/D050000L.otf"),
+                families.getFirst().regular().file());
+    }
+
+    @Test
     void loadAsksFcList() throws Exception {
         FakeRunner runner = new FakeRunner().prints("fc-list", OUTPUT);
         List<FontFamily> families = new FontCatalog(runner, PLACES, (f, i) -> FontDetails.NONE).load();

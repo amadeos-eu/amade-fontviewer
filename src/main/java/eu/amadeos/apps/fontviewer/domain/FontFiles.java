@@ -20,6 +20,14 @@ public final class FontFiles {
     private FontFiles() {
     }
 
+    /**
+     * True for PostScript Type 1 files: {@code .pfb}, {@code .pfa} and {@code .t1} (as the URW base 35 fonts
+     * that come with Ghostscript are named). Java reads them only as Type 1, not with the TrueType loader.
+     */
+    public static boolean isType1(Path file) {
+        return extension(file).map(e -> e.equals("pfb") || e.equals("pfa") || e.equals("t1")).orElse(false);
+    }
+
     public static boolean hasFontExtension(Path file) {
         return extension(file).map(EXTENSIONS::contains).orElse(false);
     }
