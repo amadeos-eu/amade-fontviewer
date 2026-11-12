@@ -4,6 +4,7 @@ import eu.amadeos.apps.fontviewer.bootstrap.AmadeFontViewerApplication;
 import eu.amadeos.apps.fontviewer.domain.Coverage;
 import eu.amadeos.apps.fontviewer.domain.FontFace;
 import eu.amadeos.apps.fontviewer.domain.FontFamily;
+import eu.amadeos.apps.fontviewer.domain.FittingSample;
 import eu.amadeos.apps.fontviewer.domain.SampleText;
 import eu.amadeos.apps.fontviewer.repository.FontViewerPreferences;
 import eu.amadeos.apps.fontviewer.service.FontLoader;
@@ -88,6 +89,7 @@ public final class MainWindow extends JFrame implements MainView {
     private FamilyModel current;
     private Font font;
     private String sampleText = "";
+    private SampleText sampleKind = SampleText.SENTENCE;
     /** True while the window itself changes its controls, so that their listeners stay quiet. */
     private boolean updating;
     private boolean typing;
@@ -330,7 +332,12 @@ public final class MainWindow extends JFrame implements MainView {
     }
 
     private void showWaterfall() {
-        waterfall.show(font, sampleText, font == null ? msg.get("preview.cannot") : "");
+        // The ready-made samples are Latin; a font without Latin letters shows its own characters instead.
+        // The user's own text is shown as typed, so that missing characters can be seen.
+        String shown = sampleKind == SampleText.OWN ? sampleText : FittingSample.forFont(font, sampleText);
+        String note = font == null ? msg.get("preview.cannot")
+                : shown.equals(sampleText) ? "" : msg.get("preview.own-characters");
+        waterfall.show(font, shown, note);
     }
 
     @Override
@@ -349,6 +356,7 @@ public final class MainWindow extends JFrame implements MainView {
     @Override
     public void showSample(SampleText kind, String text) {
         sampleText = text;
+        sampleKind = kind;
         updating = true;
         try {
             // While the user types, the field already holds the text; changing it now is not allowed.

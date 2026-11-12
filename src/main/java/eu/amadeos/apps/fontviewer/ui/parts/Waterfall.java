@@ -41,7 +41,10 @@ public final class Waterfall extends JComponent implements Scrollable {
         });
     }
 
-    /** The font at size 1 (any size; it is derived), or null for "cannot show", with {@code message} instead. */
+    /**
+     * The font at size 1 (any size; it is derived), or null for "cannot show", with {@code message} instead.
+     * With a font, a non-empty message is a short note above the sample (why it shows other characters).
+     */
     public void show(Font newFont, String newText, String newMessage) {
         font = newFont;
         text = newText == null ? "" : newText;
@@ -58,6 +61,10 @@ public final class Waterfall extends JComponent implements Scrollable {
 
     public String text() {
         return text;
+    }
+
+    public String message() {
+        return message;
     }
 
     public Font shownFont() {
@@ -86,6 +93,15 @@ public final class Waterfall extends JComponent implements Scrollable {
                 g.drawString(message, MARGIN, y + g.getFontMetrics().getAscent());
             }
             return y + 30;
+        }
+        if (!message.isEmpty()) {
+            g.setFont(label);
+            int ascent = g.getFontMetrics().getAscent();
+            if (paint) {
+                g.setColor(AmadeUI.theme() == null ? getForeground() : AmadeUI.theme().textInactive());
+                g.drawString(message, MARGIN, y + ascent);
+            }
+            y += ascent + g.getFontMetrics().getDescent() + GAP / 2;
         }
         FontRenderContext frc = g.getFontRenderContext();
         float width = Math.max(100, (getWidth() > 0 ? getWidth() : 640) - LEFT - MARGIN);

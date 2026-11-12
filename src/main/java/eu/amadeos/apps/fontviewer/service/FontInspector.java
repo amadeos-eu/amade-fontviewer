@@ -2,6 +2,7 @@ package eu.amadeos.apps.fontviewer.service;
 
 import eu.amadeos.apps.fontviewer.domain.Coverage;
 import eu.amadeos.apps.fontviewer.domain.FontDetails;
+import eu.amadeos.apps.fontviewer.domain.FontFiles;
 import eu.amadeos.apps.fontviewer.domain.Outlines;
 
 import java.awt.Font;
@@ -54,7 +55,7 @@ public class FontInspector {
             if (font.isEmpty()) return new Inspection(FontDetails.NONE, Coverage.EMPTY);
             Font f = font.get();
             int[] chars = IntStream.rangeClosed(0x20, 0xFFFF).filter(f::canDisplay).toArray();
-            boolean type1 = file.getFileName().toString().toLowerCase(java.util.Locale.ROOT).matches(".*\\.pf[ab]");
+            boolean type1 = FontFiles.isType1(file);
             FontDetails d = new FontDetails(f.getFontName(), "", "", "", "", "", "", "", "", f.getNumGlyphs(),
                     type1 ? Outlines.TYPE1 : Outlines.UNKNOWN, false, false, 0, 0, f.getFamily(), styleOf(f));
             return new Inspection(d, Coverage.of(chars));

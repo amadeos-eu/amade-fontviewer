@@ -44,8 +44,7 @@ public class FontLoader {
     // --8<-- [start:load]
     private static Optional<Font> load(Path file, int index) {
         try {
-            String ext = FontFiles.extension(file).orElse("");
-            if (ext.equals("pfb") || ext.equals("pfa")) {
+            if (FontFiles.isType1(file)) {
                 return Optional.of(Font.createFont(Font.TYPE1_FONT, file.toFile()));
             }
             Font[] fonts = Font.createFonts(file.toFile());

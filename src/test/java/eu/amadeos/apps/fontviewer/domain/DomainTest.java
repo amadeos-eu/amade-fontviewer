@@ -21,6 +21,15 @@ class DomainTest {
     }
 
     @Test
+    void type1Files() {
+        assertTrue(FontFiles.isType1(Path.of("/usr/share/fonts/type1/urw-base35/NimbusSans-Regular.t1")));
+        assertTrue(FontFiles.isType1(Path.of("a.PFB")));
+        assertTrue(FontFiles.isType1(Path.of("a.pfa")));
+        assertFalse(FontFiles.isType1(Path.of("a.otf")));
+        assertFalse(FontFiles.isType1(Path.of("t1")));
+    }
+
+    @Test
     void categoryFromPanose() {
         assertEquals(Category.SERIF, Category.of("Caladea", 2, 2, false));
         assertEquals(Category.SANS_SERIF, Category.of("Carlito", 2, 11, false));

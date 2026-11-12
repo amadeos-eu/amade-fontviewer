@@ -1,5 +1,6 @@
 package eu.amadeos.apps.fontviewer.ui.file;
 
+import eu.amadeos.apps.fontviewer.domain.FittingSample;
 import eu.amadeos.apps.fontviewer.ui.parts.DetailsPanel;
 import eu.amadeos.apps.fontviewer.ui.parts.Waterfall;
 import eu.amadeos.commons.i18n.Messages;
@@ -115,7 +116,11 @@ public final class FileWindow extends JFrame implements FileView {
         forAll.setEnabled(true);
         show.setVisible(installed);
         hint.setVisible(isFont && !installed);
-        waterfall.show(font, msg.get("sample.sentence.text"), isFont ? msg.get("preview.cannot") : msg.get("file.not-a-font"));
+        String sentence = msg.get("sample.sentence.text");
+        String shown = FittingSample.forFont(font, sentence);
+        String note = font != null ? (shown.equals(sentence) ? "" : msg.get("preview.own-characters"))
+                : isFont ? msg.get("preview.cannot") : msg.get("file.not-a-font");
+        waterfall.show(font, shown, note);
         details.show(newModel.details());
         getRootPane().setDefaultButton(installed ? show : forMe);
     }

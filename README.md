@@ -10,7 +10,7 @@
 ## Features
 
 - **Font list**: all font families from fontconfig, each name drawn in its own font, with its kind (serif, sans serif, monospace, handwriting, display, symbols), the number of styles and *yours* for the fonts you installed. Search by name and filter by *My fonts* or a kind.
-- **Preview**: your own sample text or a ready one (sentence, alphabet, numbers, paragraph) from 12 to 64 pt, in every style of the family. The text stays when you choose another font.
+- **Preview**: your own sample text or a ready one (sentence, alphabet, numbers, paragraph) from 12 to 64 pt, in every style of the family. The text stays when you choose another font. A font without Latin letters (Arabic, Devanagari, cuneiform, dingbats ...) shows its own characters instead of empty boxes, with a short note; your own text is always shown as typed.
 - **Characters**: every character of the font by Unicode block (missing ones grey), search by name (`sharp s`) or code (`U+00DF`, `00df`), the chosen character large with base line and x-height, its code, Unicode name and HTML entity; *Copy Character* and *Copy Code*.
 
   ![Characters](docs/screenshots/amade-fontviewer-characters.png)
